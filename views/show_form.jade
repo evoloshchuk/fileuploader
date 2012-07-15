@@ -1,0 +1,26 @@
+extends layout
+
+block content
+  script(type='text/javascript', src="/javascripts/form.js")
+
+  h1=title
+  
+  form(id="upload_form", action="/upload_file", method="post",
+       enctype="multipart/form-data", target="upload_target")
+    input(name="upload_file", id="upload_file", type="file",
+          value="Select File")
+
+  span Status:
+    span(id="upload_status")
+
+  form(action="/", method="post")
+    input(name="filename", id="filename", type="hidden", value="")
+    input(name="filepath", id="filepath", type="hidden", value="")
+    br
+    textarea(name="message", rows=10, cols=50)
+    br
+    input(type="submit", value="Save")
+    
+  iframe(id="upload_target", name="upload_target", src="#")  
+  
+

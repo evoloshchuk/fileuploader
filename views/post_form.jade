@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  h1=title
+  ul
+    li
+      i Filename: 
+      b #{uploaded_filename}
+    li
+      i Filepath: 
+      b #{uploaded_filepath}
+    li
+      i Message: 
+      b #{message}
+  a(href="/") Upload more  
+
