@@ -1,0 +1,40 @@
+Fileuploader is a simple implementation of a file upload with a progress bar.
+
+The core idea is following:
+
+1) Asynchronous file uploading is implemented by using hidden iframe as a target
+for multipart form submission.
+2) Before submiting a form, another asynchronous request to the server is done
+in order to get a connection id, which will be used later by the server to
+communicate the upload progress back to the client.
+3) Obtained connection id is passed along with the POST request as a query 
+parameter.
+4) The server, while processing data upload, reports back the progress using the
+given connection.
+
+Technical details:
+
+* Node.js platform is used to build this application. Non-blocking server would be
+the best choice for such io-intensive application. Though node.is was choosen 
+mostly because of educational reasons.
+
+* Socket.io is used to facilitate client-server communication for the progress
+report. The original idea was to use the best suitable transport for each 
+browser (websockets of course). Unfortunately, because of the limitation of the
+Heroku Cedar stack (where this application is running), the transport had to be
+changed to xhr-polling. Which still works good enough.
+
+* Express framework is used to organize web application.
+
+* Heroku application platform is used to run the application.
+
+Installation:
+
+1) install node.js - see http://nodejs.org/#download
+2) git clone git://github.com/evoloshchuk/fileuploader.git taget
+3) cd target
+4) node app.js
+
+Demo:
+
+http://floating-sunset-2904.herokuapp.com/
