@@ -33,7 +33,7 @@ $(document).ready(function() {
         
         // Open a new connection with a server
         var options = {'force new connection': true};
-        socket = io.connect("http://localhost:8080", options);
+        socket = io.connect($(location).attr('href'), options);
 
         /**
          * Connection with server established event.
