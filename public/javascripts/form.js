@@ -45,6 +45,7 @@ $(document).ready(function() {
             var upload_form = $("#upload_form")
             upload_form.attr("action", "/upload_file?cid=" + connection_id);
             upload_form.submit();
+            upload_status.text('0%');
         });
         
         /**
