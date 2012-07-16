@@ -28,10 +28,10 @@ app.get('/', routes.show_form);
 app.post('/', routes.post_form);
 app.post('/upload_file', routes.upload_file);
 
-var server = http.createServer(app)
+var server = http.createServer(app);
 
 server.listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
 });
 
-require('./websockets.js').attach(server)
+require('./sockets.js').attach(server);

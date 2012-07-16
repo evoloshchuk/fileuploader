@@ -16,7 +16,7 @@ exports.show_form = function(req, res) {
 exports.upload_file = function(req, res) {
     // Get a reference to the open connection with the client.
     try {
-        var connection = require('../websockets.js').io.sockets.socket(
+        var connection = require('../sockets.js').get_connection(
             req.query["cid"]);
     } catch (e) {
         res.end("Error occured. Something went wrong.");

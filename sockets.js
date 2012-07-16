@@ -23,6 +23,10 @@ exports.attach = function(server) {
         socket.emit('connection', socket.id);
     });
     
-    // Export current socket.io server
-    exports.io = io;
+    /**
+     * Returns a connection by its id.
+     */
+    exports.get_connection = function(connection_id) {
+        return io.sockets.socket(connection_id)
+    };
 };
