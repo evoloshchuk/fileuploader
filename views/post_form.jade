@@ -9,8 +9,9 @@ block content
     li
       i Filepath: 
       b 
-        a(href="/download_file/#{uploaded_fileid}", target="_new")
-          /uploads/#{uploaded_fileid}
+        if uploaded_fileid
+          a(href="/download_file/#{uploaded_fileid}", target="_new")
+            /uploads/#{uploaded_fileid}
     li
       i Message: 
       b #{message}
