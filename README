@@ -28,6 +28,11 @@ changed to xhr-polling. Which still works good enough.
 
 * Heroku application platform is used to run the application.
 
+* It's clear that such approach won't easily work on a cluster, which was not a
+goal for this application. Also it won't be much of an effort to make it work
+there (if/when it's need) by using upload tracking ids together with some storage.
+
+
 Installation:
 
 1) install node.js - see http://nodejs.org/#download
