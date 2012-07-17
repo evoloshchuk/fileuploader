@@ -23,7 +23,7 @@ exports.upload_file = function(req, res) {
         return;
     }
 
-    var files = []
+    var uploaded_file;
 
     var form = formidable.IncomingForm()
     form.uploadDir = './uploads';
@@ -56,8 +56,10 @@ exports.upload_file = function(req, res) {
     /**
      * File received event.
      */
-    form.on('file', function(field, file) { 
-        files.push([field, file])
+    form.on('file', function(field, file) {
+        if (field == "upload_file") {
+          uploaded_file = file;
+        }
     });
 
     /**
@@ -66,10 +68,14 @@ exports.upload_file = function(req, res) {
     form.on('end', function() {
         res.end();
         // Let's notify the client.
-        var filepath = files[0][1].path; // "uploads/id"
-        var id = filepath.split('/')[1];
-        var response = {'id': id, 'name': files[0][1].name}
-        connection.emit('end', response) 
+        if (uploaded_file) {
+            var filepath = uploaded_file.path; // "uploads/id"
+            var id = filepath.split('/')[1];
+            var response = {'id': id, 'name': uploaded_file.name};
+            connection.emit('end', response);
+        } else {
+            connection.emit('error');
+        }
     });
      
     form.parse(req);
@@ -102,8 +108,8 @@ exports.post_form = function(req, res) {
      * Something went wrong.
      */
     form.on('error', function(err) {
-        console.log("Error with processing form.")
-        res.end("Error occured.")
+        console.log("Error with processing form.");
+        res.end("Error occured.");
     });
     
     /**
