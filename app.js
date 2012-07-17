@@ -26,6 +26,7 @@ app.configure('development', function(){
 
 app.get('/', routes.show_form);
 app.post('/', routes.post_form);
+app.get('/download_file/:id', routes.download_file);
 app.post('/upload_file', routes.upload_file);
 
 var server = http.createServer(app);

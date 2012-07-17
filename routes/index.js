@@ -66,20 +66,28 @@ exports.upload_file = function(req, res) {
     form.on('end', function() {
         res.end();
         // Let's notify the client.
-        var response = {'path': files[0][1].path, 'name': files[0][1].name}
+        var filepath = files[0][1].path; // "uploads/id"
+        var id = filepath.split('/')[1];
+        var response = {'id': id, 'name': files[0][1].name}
         connection.emit('end', response) 
     });
      
     form.parse(req);
 };
 
+/**
+ * GET download uploaded file
+ */
+exports.download_file = function(req, res) {
+    res.download('uploads/' + req.params.id);
+};
 
 /*
  * POST form page.
  */
 exports.post_form = function(req, res) {
     // Default values for expected fields
-    var fields = {filename: "", filepath: "", message: ""};
+    var fields = {filename: "", fileid: "", message: ""};
 
     var form = formidable.IncomingForm();       
 
@@ -105,7 +113,7 @@ exports.post_form = function(req, res) {
         res.render('post_form', {
             title: 'SuperUpload form posted',
             uploaded_filename: fields['filename'],
-            uploaded_filepath: fields['filepath'],
+            uploaded_fileid: fields['fileid'],
             message: fields['message']});
     });
      

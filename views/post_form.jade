@@ -8,7 +8,9 @@ block content
       b #{uploaded_filename}
     li
       i Filepath: 
-      b #{uploaded_filepath}
+      b 
+        a(href="/download_file/#{uploaded_fileid}", target="_new")
+          /uploads/#{uploaded_fileid}
     li
       i Message: 
       b #{message}

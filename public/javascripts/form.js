@@ -28,7 +28,7 @@ $(document).ready(function() {
             socket.disconnect();
             // Let's clear main form file related fields.
             $("#filename").val("");
-            $("#filepath").val("");
+            $("#fileid").val("");
         }
         
         // Open a new connection with a server
@@ -71,9 +71,10 @@ $(document).ready(function() {
          */
         socket.on("end", function (data) {
             socket.disconnect();
-            upload_status.text('100% ' + data["path"]);
+            upload_status.html('100% <a href="/download_file/' + data["id"] +
+                               '" target="_new">download</a>');
             $("#filename").val(data["name"]);
-            $("#filepath").val(data["path"]);
+            $("#fileid").val(data["id"]);
         });
         
         /**
